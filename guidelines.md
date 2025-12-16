@@ -1,38 +1,87 @@
-# Form Guidelines
+1. Component Design
 
-This document provides guidelines for building and validating forms in modern web applications.
+Keep components small and focused (single responsibility).
 
----
+Prefer functional components over class components.
 
-## 1. Form Structure
-- Use the `<form>` tag with proper `action` and `method` attributes (`POST` for submissions).
-- Every input field **must have a `name` attribute**.
-- Use `<label>` elements for accessibility.
-- Group related inputs using `<fieldset>` if needed.
+Split large components into reusable subcomponents.
 
----
+Avoid deeply nested JSX.
 
-## 2. Input Types
-- Use appropriate input types for better UX and built-in validation:
-  - `text`, `email`, `password`, `number`, `date`, `checkbox`, `radio`, `file`, etc.
-- Use `required`, `minlength`, `maxlength`, and `pattern` attributes for HTML validation.
+2. State Management
 
----
+Never mutate state directly.
 
-## 3. Validation Guidelines
-- **Client-side validation:**  
-  - Use libraries like **React Hook Form** for handling form state and validation.
-  - Example with **Zod** schema validation:
+Use the functional form of state updates when relying on previous state.
 
-```javascript
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+Lift state up only when necessary.
 
-const schema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-});
-const { register, handleSubmit, formState: { errors } } = useForm({
-  resolver: zodResolver(schema),
-});
+Avoid duplicating derived state.
+
+setCount(prev => prev + 1);
+
+3. Hooks Usage
+
+Always include dependency arrays in useEffect.
+
+Do not call hooks conditionally or inside loops.
+
+Clean up side effects in useEffect when needed.
+
+Use useMemo and useCallback to prevent unnecessary re-renders.
+
+4. Performance
+
+Avoid expensive computations during render.
+
+Memoize heavy calculations and callbacks.
+
+Use React.memo for pure components.
+
+Avoid inline object and function creation in JSX when possible.
+
+5. Rendering Lists
+
+Always provide a stable and unique key prop.
+
+Never use array index as a key unless the list is static.
+
+Keep list rendering logic clean and minimal.
+
+6. Accessibility (a11y)
+
+Use semantic HTML elements.
+
+Every input must have a corresponding <label>.
+
+Buttons and interactive elements should be keyboard accessible.
+
+Provide aria-* attributes where necessary.
+
+Avoid using div for clickable elements.
+
+7. Security
+
+Avoid dangerouslySetInnerHTML unless absolutely necessary.
+
+Sanitize all user-generated content.
+
+Never expose secrets or tokens in frontend code.
+
+8. Styling
+
+Prefer CSS modules, styled-components, or external stylesheets.
+
+Avoid excessive inline styles.
+
+Use consistent naming conventions.
+
+Keep styles colocated with components when reasonable.
+
+9. Error Handling
+
+Handle loading and error states for async operations.
+
+Use error boundaries for critical UI sections.
+
+Avoid silent failures.
