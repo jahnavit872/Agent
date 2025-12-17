@@ -48,7 +48,14 @@ const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+import styles from './LoginForm.module.css';
+
+return (
+  <div className={styles.container}>
+    <h2>Login</h2>
+    ...
+  </div>
+);
       <h2>Login</h2>
       <Formik
         initialValues={{ username: "", password: "" }}
