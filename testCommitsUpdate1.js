@@ -15,7 +15,9 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+import { toast } from 'react-toastify';
+
+toast.success(`Welcome ${data.username}`);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: "POST",
