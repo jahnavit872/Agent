@@ -6,7 +6,16 @@ import * as Yup from "yup";
 
 
 const LoginForm = () => {
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+// With proper error handling
+async function fetchData() {
+  try {
+    const result = await someAsyncOperation();
+    return result;
+  } catch (error) {
+    console.error('Operation failed:', error);
+    throw error;  // Re-throw or handle appropriately
+  }
+}
     try {
 const apiUrl = process.env.REACT_APP_API_URL;
 const response = await fetch(`${apiUrl}/login`, {
