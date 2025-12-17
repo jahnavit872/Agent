@@ -37,7 +37,9 @@ const handleSubmit = async (values, { setSubmitting, resetForm }) => {
   }
 }
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+useEffect(() => {
+  // effect logic here
+}, [dependencies]);
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
