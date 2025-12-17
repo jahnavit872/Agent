@@ -39,6 +39,8 @@ const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
 useEffect(() => {
   // effect logic here
+}, []); // Add the necessary dependencies here
+  // effect logic here
 }, [dependencies]);
         method: "POST",
         headers: { "Content-Type": "application/json" },
