@@ -19,7 +19,16 @@ const handleSubmit = async (values, { setSubmitting, resetForm }) => {
   await fetchData(); // Call the fetchData function here
   // existing login logic
 };
+const handleSubmit = async (values, { setSubmitting, resetForm }) => {
   try {
+    await fetchData(); // Call the fetchData function here
+    const result = await someAsyncOperation();
+    return result;
+  } catch (error) {
+    console.error('Operation failed:', error);
+    alert('Operation failed. Please try again.');
+  }
+};
     const result = await someAsyncOperation();
     return result;
   } catch (error) {
