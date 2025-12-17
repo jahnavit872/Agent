@@ -8,7 +8,14 @@ import * as Yup from "yup";
 const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+if (!process.env.REACT_APP_API_URL) {
+  throw new Error('API URL is not defined');
+}
+const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(values),
+});
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
