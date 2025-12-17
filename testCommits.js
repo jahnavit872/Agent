@@ -8,6 +8,14 @@ import * as Yup from "yup";
 const LoginForm = () => {
 // With proper error handling
 const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  try {
+    await fetchData(); // Call the fetchData function here
+    // existing login logic
+  } catch (error) {
+    console.error('Fetch data failed:', error);
+    alert('Fetch data failed. Please try again.');
+  }
+};
   await fetchData(); // Call the fetchData function here
   // existing login logic
 };
