@@ -49,7 +49,10 @@ const handleSubmit = async (values, { setSubmitting, resetForm }) => {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+<div className="login-form">
+  <h2>Login</h2>
+  ...
+</div>
       <h2>Login</h2>
       <Formik
         initialValues={{ username: "", password: "" }}
