@@ -8,7 +8,12 @@ import * as Yup from "yup";
 const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+const apiUrl = process.env.REACT_APP_API_URL;
+const response = await fetch(`${apiUrl}/login`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(values),
+});
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
