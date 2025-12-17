@@ -9,6 +9,9 @@ const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
 if (!process.env.REACT_APP_API_URL) {
+  console.error('API URL is not defined');
+  return;
+}
   throw new Error('API URL is not defined');
 }
 const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
