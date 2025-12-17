@@ -49,6 +49,9 @@ const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
 
   return (
 import styles from './LoginForm.module.css';
+const LoginForm = () => {
+  // component code
+};
 
 return (
   <div className={styles.container}>
