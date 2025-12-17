@@ -7,7 +7,10 @@ import * as Yup from "yup";
 
 const LoginForm = () => {
 // With proper error handling
-async function fetchData() {
+const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  await fetchData(); // Call the fetchData function here
+  // existing login logic
+};
   try {
     const result = await someAsyncOperation();
     return result;
