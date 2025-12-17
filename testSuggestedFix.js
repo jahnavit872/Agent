@@ -8,7 +8,9 @@ export default function App() {
  
   useEffect(() => {
     fetchUsers();
-  }, []);
+useEffect(() => {
+  fetchUsers();
+}, []);
 
   function fetchUsers() {
     setLoading(true);
