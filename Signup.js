@@ -4,6 +4,16 @@ import DOMPurify from 'dompurify';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+const LoginSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(3, "Username too short")
+    .max(20, "Username too long")
+    .required("Username is required"),
+  password: Yup.string()
+    .min(6, "Password too short")
+    .required("Password is required"),
+});
+
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
         const apiUrl = process.env.REACT_APP_API_URL;
