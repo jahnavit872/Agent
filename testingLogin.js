@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-        const apiUrl = process.env.REACT_APP_API_URL;
+        const apiUrl = process.env.REACT_APP_API_URL || 'https://ideyalabs-api-url.com';
 
     const response = await fetch(`${apiUrl}/login`, {
         method: "POST",
