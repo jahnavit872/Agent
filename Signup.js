@@ -1,4 +1,4 @@
-// src/components/LoginForm.js
+// src/components/Signup.js
 import React from "react";
 import DOMPurify from 'dompurify';
 import { Formik, Form, Field, ErrorMessage } from "formik";
