@@ -1,5 +1,6 @@
 // src/components/LoginForm.js
 import React from "react";
+import DOMPurify from 'dompurify';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -21,8 +22,8 @@ import * as Yup from "yup";
       }
 
       const data = await response.json();
-     
-      alert(`Welcome ${data.username}`);
+      const sanitizedUsername = DOMPurify.sanitize(data.username);
+      alert(`Welcome ${sanitizedUsername}`);
       resetForm();
     } catch (error) {
       alert(error.message);
