@@ -32,7 +32,8 @@ const LoginSchema = Yup.object().shape({
       }
 
       const data = await response.json();
-      alert(`Welcome ${data.username}`);
+      const sanitizedUsername = data.username;
+      alert(`Welcome ${sanitizedUsername}`);
       resetForm();
     } catch (error) {
       alert(error.message);
