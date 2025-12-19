@@ -6,6 +6,10 @@ import * as Yup from "yup";
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
         const apiUrl = process.env.REACT_APP_API_URL || 'https://ideyalabs-api-url.com';
+         if (!apiUrl) {
+      throw new Error('API URL is not defined');
+        }
+
 
     const response = await fetch(`${apiUrl}/login`, {
         method: "POST",
