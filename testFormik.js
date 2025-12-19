@@ -8,7 +8,7 @@ import * as Yup from "yup";
     try {
         const apiUrl = process.env.REACT_APP_API_URL;
          
-        if (!apiUrl) {
+        if (!apiUrl || !/^https?:\/\/.test(apiUrl)) {
       throw new Error('API URL is not defined');
         }
 
