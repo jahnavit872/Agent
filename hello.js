@@ -16,7 +16,7 @@ const LoginSchema = Yup.object().shape({
     try {
         const apiUrl = process.env.REACT_APP_API_URL;
         if (!apiUrl) {
-      throw new Error('API URL is not defined');
+      throw new Error('API URL is not defined so throwing error');
         }
  
  
