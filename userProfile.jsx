@@ -28,7 +28,7 @@ function UserProfile(props) {
   return (
     <div>
       <h2>User Profile</h2>
-      <p>Name: {user.name}</p>
+      {user? <p>Name: {user.name}</p> : <p>No user data available</p> }
       <button onClick={handleClick}>Click</button>
     </div>
   );
