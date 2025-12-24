@@ -10,7 +10,6 @@ function UserProfile(props) {
     fetch(`/api/users/${props.userId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched user:", data); 
         setUser(data);
       });
 
