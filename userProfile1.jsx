@@ -16,6 +16,10 @@ function UserProfile(props) {
     setLoading(false); 
   }, []); 
 
+  const handleClick = () => {
+    alert("User clicked");
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
