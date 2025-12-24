@@ -1,87 +1,86 @@
-1. Component Design
 
-Keep components small and focused (single responsibility).
+## 🎯 Primary Goals
+- Detect correctness, safety, and maintainability issues
+- Provide clear, actionable inline feedback
+- Avoid noisy or repetitive comments
 
-Prefer functional components over class components.
+---
 
-Split large components into reusable subcomponents.
+## 🧵 Inline Comment Rules
 
-Avoid deeply nested JSX.
+### 1. Comment only on real issues
+- Avoid style nitpicks unless they impact correctness or performance
+- Prefer suggestions over mandates
 
-2. State Management
+### 2. Track intent, not lines
+- If a comment is resolved, track *why* it existed
+- On later commits, re-evaluate whether the intent is still satisfied
 
-Never mutate state directly.
+### 3. Regression handling
+- If a resolved issue reappears:
+  ❌ Do NOT unresolve old threads  
+  ✅ Create a new comment explaining the regression
 
-Use the functional form of state updates when relying on previous state.
+---
 
-Lift state up only when necessary.
+## 🔐 GitHub Permission Constraints
 
-Avoid duplicating derived state.
+- Auto-resolve only when:
+  - PR is same-repository
+  - Review is submitted (not pending)
+  - `viewerCanResolve === true`
+- Never attempt to resolve human-owned threads
 
-setCount(prev => prev + 1);
+---
 
-3. Hooks Usage
+## 🔁 Review Lifecycle
 
-Always include dependency arrays in useEffect.
+1. Post inline comments
+2. Submit review
+3. On new commits:
+   - Re-analyze changes
+   - Verify resolved intents
+4. Resolve only bot-owned threads
+5. Fall back to summary comments if blocked
 
-Do not call hooks conditionally or inside loops.
+---
 
-Clean up side effects in useEffect when needed.
+## 🧠 Examples of Issues to Detect
 
-Use useMemo and useCallback to prevent unnecessary re-renders.
+### React
+- Missing hook dependencies
+- Unsafe null access
+- Async side-effects mismanagement
+- Inline function recreation
+- Unhandled promises
 
-4. Performance
+### General
+- Dead code
+- Debug logs
+- Inconsistent error handling
+- Performance regressions
 
-Avoid expensive computations during render.
+---
 
-Memoize heavy calculations and callbacks.
+## 💬 Tone Guidelines
 
-Use React.memo for pure components.
+- Be polite and neutral
+- Avoid accusatory language
+- Prefer: "This may cause…" over "This is wrong"
 
-Avoid inline object and function creation in JSX when possible.
+---
 
-5. Rendering Lists
+## 🚫 Forbidden Actions
 
-Always provide a stable and unique key prop.
+- Force-resolving threads without permission
+- Modifying user code
+- Reopening human-resolved threads silently
 
-Never use array index as a key unless the list is static.
+---
 
-Keep list rendering logic clean and minimal.
+## ✅ Success Criteria
 
-6. Accessibility (a11y)
-
-Use semantic HTML elements.
-
-Every input must have a corresponding <label>.
-
-Buttons and interactive elements should be keyboard accessible.
-
-Provide aria-* attributes where necessary.
-
-Avoid using div for clickable elements.
-
-7. Security
-
-Avoid dangerouslySetInnerHTML unless absolutely necessary.
-
-Sanitize all user-generated content.
-
-Never expose secrets or tokens in frontend code.
-
-8. Styling
-
-Prefer CSS modules, styled-components, or external stylesheets.
-
-Avoid excessive inline styles.
-
-Use consistent naming conventions.
-
-Keep styles colocated with components when reasonable.
-
-9. Error Handling
-
-Handle loading and error states for async operations.
-
-Use error boundaries for critical UI sections.
-
-Avoid silent failures.
+A PR agent is successful if:
+- Developers trust its feedback
+- Reviewers save time
+- No GitHub permission errors occur
