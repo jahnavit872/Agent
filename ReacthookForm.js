@@ -1,23 +1,28 @@
+
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
- 
- 
+
+
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
         const apiUrl = process.env.REACT_APP_API_URL;
- 
- 
+         
+        if (!apiUrl) {
+      throw new Error('API URL is not defined');
+        }
+
+
     const response = await fetch(`${apiUrl}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
- 
+
       if (!response.ok) {
         throw new Error("Login failed");
       }
- 
+
       const data = await response.json();
      
       alert(`Welcome ${data.username}`);
@@ -28,7 +33,7 @@ import * as Yup from "yup";
       setSubmitting(false);
     }
   };
- 
+
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto" }}>
       <h2>Login</h2>
@@ -52,7 +57,7 @@ import * as Yup from "yup";
                 style={{ color: "red" }}
               />
             </div>
- 
+
             <div style={{ marginBottom: "1rem" }}>
               <label htmlFor="password">Password</label>
               <Field
@@ -66,7 +71,7 @@ import * as Yup from "yup";
                 style={{ color: "red" }}
               />
             </div>
- 
+
             <button type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Logging in..." : "Login"}
             </button>
@@ -75,5 +80,5 @@ import * as Yup from "yup";
      </Formik>
     </div>
   );
- 
+
 export default LoginForm;
