@@ -1,86 +1,38 @@
+# Form Guidelines
 
-## 🎯 Primary Goals
-- Detect correctness, safety, and maintainability issues
-- Provide clear, actionable inline feedback
-- Avoid noisy or repetitive comments
+This document provides guidelines for building and validating forms in modern web applications.
 
 ---
 
-## 🧵 Inline Comment Rules
-
-### 1. Comment only on real issues
-- Avoid style nitpicks unless they impact correctness or performance
-- Prefer suggestions over mandates
-
-### 2. Track intent, not lines
-- If a comment is resolved, track *why* it existed
-- On later commits, re-evaluate whether the intent is still satisfied
-
-### 3. Regression handling
-- If a resolved issue reappears:
-  ❌ Do NOT unresolve old threads  
-  ✅ Create a new comment explaining the regression
+## 1. Form Structure
+- Use the `<form>` tag with proper `action` and `method` attributes (`POST` for submissions).
+- Every input field **must have a `name` attribute**.
+- Use `<label>` elements for accessibility.
+- Group related inputs using `<fieldset>` if needed.
 
 ---
 
-## 🔐 GitHub Permission Constraints
-
-- Auto-resolve only when:
-  - PR is same-repository
-  - Review is submitted (not pending)
-  - `viewerCanResolve === true`
-- Never attempt to resolve human-owned threads
+## 2. Input Types
+- Use appropriate input types for better UX and built-in validation:
+  - `text`, `email`, `password`, `number`, `date`, `checkbox`, `radio`, `file`, etc.
+- Use `required`, `minlength`, `maxlength`, and `pattern` attributes for HTML validation.
 
 ---
 
-## 🔁 Review Lifecycle
+## 3. Validation Guidelines
+- **Client-side validation:**  
+  - Use libraries like **React Hook Form** for handling form state and validation.
+  - Example with **Zod** schema validation:
 
-1. Post inline comments
-2. Submit review
-3. On new commits:
-   - Re-analyze changes
-   - Verify resolved intents
-4. Resolve only bot-owned threads
-5. Fall back to summary comments if blocked
+```javascript
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
----
-
-## 🧠 Examples of Issues to Detect
-
-### React
-- Missing hook dependencies
-- Unsafe null access
-- Async side-effects mismanagement
-- Inline function recreation
-- Unhandled promises
-
-### General
-- Dead code
-- Debug logs
-- Inconsistent error handling
-- Performance regressions
-
----
-
-## 💬 Tone Guidelines
-
-- Be polite and neutral
-- Avoid accusatory language
-- Prefer: "This may cause…" over "This is wrong"
-
----
-
-## 🚫 Forbidden Actions
-
-- Force-resolving threads without permission
-- Modifying user code
-- Reopening human-resolved threads silently
-
----
-
-## ✅ Success Criteria
-
-A PR agent is successful if:
-- Developers trust its feedback
-- Reviewers save time
-- No GitHub permission errors occur
+const schema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+});
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(schema),
+});
