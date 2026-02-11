@@ -9,7 +9,7 @@
 - Use IDE tools to detect and remove unused imports
 
 ## 2. Form Validation Requirements
-
+Use react-hook form only
 ### Rule: Password Minimum Length
 - **Password fields MUST require minimum 8 characters**
 - Include complexity requirements (uppercase, lowercase, number, special char)
